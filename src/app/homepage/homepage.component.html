@@ -1,0 +1,70 @@
+<div class="title-wrapper">
+    <h1>TheLoopFlix</h1>
+    <button mat-icon-button (click)="getFavorites()" [matMenuTriggerFor]="menu">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <span mat-menu-item *ngIf="favs.length == 0">
+            No favorites yet.
+        </span>
+        <button mat-menu-item *ngFor="let movie of favs; let i = index;">
+            <mat-icon (click)="removeFromBookmarks(favIds[i])">close</mat-icon>
+            <span (click)="focusMovieById(favIds[i]);">{{favs[i]}}</span>
+        </button>
+    </mat-menu>
+</div>
+<div class="search-wrapper">
+    <mat-form-field class="title-field" appearance="outline">
+        <mat-label>Search by Title</mat-label>
+        <input #title type="text" matInput [value]="title.value" (keyup)="onChange('title', title.value)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <div class="filters-wrapper">
+        <mat-form-field class="year-field" appearance="outline">
+            <mat-label>Year</mat-label>
+            <input #year matInput [value]="year.value" (keyup)="onChange('year', year.value)">
+        </mat-form-field>
+        <mat-form-field class="imbdid-field" appearance="outline">
+            <mat-label>IMBD Id</mat-label>
+            <input #imbdid matInput [value]="imbdid.value"
+                (keyup)="onChange('imbdid', imbdid.value); title.value=''; year.value=''">
+        </mat-form-field>
+    </div>
+</div>
+<!-- <div class="bookmarks-wrapper" *ngIf="this.favs.length > 0">
+    <h2>Favorites</h2>
+    <div class="movie-list">
+        <mat-card *ngFor="let movie of favs">
+            <mat-card-header>
+                <div class="titles-wrapper" (click)="focusMovie(movie)">
+                    <mat-card-title>{{movie.Title}}</mat-card-title>
+                    <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
+                </div>
+                <div class="btn-wrapper">
+                    <mat-icon *ngIf="!isFav(movie)" (click)="addToBookmarks(movie)">bookmark_add</mat-icon>
+                    <mat-icon *ngIf="isFav(movie)" (click)="removeFromBookmarks(movie)">bookmark</mat-icon>
+                    <img class="imbd-btn" (click)="goToIMBD(movie.imdbID)" src="../../assets/imbd-logo.png" alt="">
+                </div>
+            </mat-card-header>
+            <img class="poster" (click)="focusMovie(movie)" src="{{processPoster(movie.Poster)}}" alt="">
+        </mat-card>
+    </div>
+</div> -->
+<div class="movie-list-wrapper">
+    <div class="movie-list">
+        <mat-card *ngFor="let movie of listOfMovies">
+            <mat-card-header>
+                <div class="titles-wrapper" (click)="focusMovie(movie)">
+                    <mat-card-title>{{movie.Title}}</mat-card-title>
+                    <mat-card-subtitle>{{movie.Year}}</mat-card-subtitle>
+                </div>
+                <div class="btn-wrapper">
+                    <mat-icon *ngIf="!isFav(movie)" (click)="addToBookmarks(movie)">bookmark_add</mat-icon>
+                    <mat-icon *ngIf="isFav(movie)" (click)="removeFromBookmarks(movie)">bookmark</mat-icon>
+                    <img class="imbd-btn" (click)="goToIMBD(movie.imdbID)" src="../../assets/imbd-logo.png" alt="">
+                </div>
+            </mat-card-header>
+            <img class="poster" (click)="focusMovie(movie)" src="{{processPoster(movie.Poster)}}" alt="">
+        </mat-card>
+    </div>
+</div>

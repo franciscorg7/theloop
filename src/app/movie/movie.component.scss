@@ -1,0 +1,14 @@
+button {
+  margin: 2em 2em 0 2em;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2em 0;
+  align-items: center;
+  .content-card {
+    width: 60%;
+    word-wrap: break-word;
+  }
+}
